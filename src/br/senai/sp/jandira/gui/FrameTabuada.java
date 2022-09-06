@@ -59,12 +59,12 @@ public class FrameTabuada {
 
 		JLabel labelDescricaoTabuada = new JLabel();
 		labelDescricaoTabuada.setText("Com a tabuada 1.0 os seus problemas acabaram. Calcule");
-		labelDescricaoTabuada.setForeground(new Color(181, 181, 181));
+		labelDescricaoTabuada.setForeground(new Color(128,128,128));
 		labelDescricaoTabuada.setBounds(80, 5, 340, 100);
 
 		JLabel labelDescricaoTabuada2 = new JLabel();
 		labelDescricaoTabuada2.setText("a tabuada que desejar em segundos!");
-		labelDescricaoTabuada2.setForeground(new Color(181, 181, 181));
+		labelDescricaoTabuada2.setForeground(new Color(128,128,128));
 		labelDescricaoTabuada2.setBounds(80, 17, 340, 100);
 
 		JLabel labelMultiplicando = new JLabel();
@@ -84,14 +84,14 @@ public class FrameTabuada {
 		
 		JButton buttonCalcular = new JButton();
 		buttonCalcular.setText("Calcular");
-		buttonCalcular.setBackground(new Color(1, 107, 12));
+		buttonCalcular.setBackground(new Color(34,139,34));
 		buttonCalcular.setForeground(Color.white);
 		buttonCalcular.setFont(buttonEResultado);
-		buttonCalcular.setBounds(15, 260, 247, 40);
+		buttonCalcular.setBounds(15, 260, 240, 40);
 
 		JButton buttonLimpar = new JButton();
 		buttonLimpar.setText("Limpar");
-		buttonLimpar.setBackground(new Color(237, 186, 2));
+		buttonLimpar.setBackground(new Color(255,215,0));
 		buttonLimpar.setForeground(Color.white);
 		buttonLimpar.setFont(buttonEResultado);
 		buttonLimpar.setBounds(270, 260, 200, 40);
