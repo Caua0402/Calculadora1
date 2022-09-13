@@ -46,10 +46,29 @@ public class FrameTabuada {
 
 		// Criação dos componentes da tela
 
-//		URL url = getClass().getResource("/images/aprendendo.png");
-//		ImageIcon icon = new ImageIcon(url);
-//		JLabel labelAprendendo = new JLabel(icon);
-//		labelAprendendo.setBounds(-10, -5, 100, 100);
+		URL url = getClass().getResource("/imagem/ImagemTabuada.png");
+		ImageIcon icon = new ImageIcon(url);
+		JLabel labelAprendendo = new JLabel(icon);
+		labelAprendendo.setBounds(-10, -5, 100, 100);
+		
+		JButton buttonCalcular = new JButton();
+		buttonCalcular.setText("Calcular");
+		buttonCalcular.setBackground(new Color(1, 107, 12));
+		buttonCalcular.setForeground(Color.white);
+		buttonCalcular.setFont(buttonEResultado);
+		buttonCalcular.setBounds(15, 260, 247, 40);
+
+		JButton buttonLimpar = new JButton();
+		buttonLimpar.setText("Limpar");
+		buttonLimpar.setBackground(new Color(237, 186, 2));
+		buttonLimpar.setForeground(Color.white);
+		buttonLimpar.setFont(buttonEResultado);
+		buttonLimpar.setBounds(270, 260, 200, 40);
+
+		JLabel labelResultado = new JLabel();
+		labelResultado.setText("Resultado:");
+		labelResultado.setFont(buttonEResultado);
+		labelResultado.setBounds(15, 295, 150, 50);
 
 		JLabel labelTituloTabuada = new JLabel();
 		labelTituloTabuada.setText("Tabuada");
@@ -59,12 +78,12 @@ public class FrameTabuada {
 
 		JLabel labelDescricaoTabuada = new JLabel();
 		labelDescricaoTabuada.setText("Com a tabuada 1.0 os seus problemas acabaram. Calcule");
-		labelDescricaoTabuada.setForeground(new Color(128,128,128));
+		labelDescricaoTabuada.setForeground(new Color(181, 181, 181));
 		labelDescricaoTabuada.setBounds(80, 5, 340, 100);
 
 		JLabel labelDescricaoTabuada2 = new JLabel();
 		labelDescricaoTabuada2.setText("a tabuada que desejar em segundos!");
-		labelDescricaoTabuada2.setForeground(new Color(128,128,128));
+		labelDescricaoTabuada2.setForeground(new Color(181, 181, 181));
 		labelDescricaoTabuada2.setBounds(80, 17, 340, 100);
 
 		JLabel labelMultiplicando = new JLabel();
@@ -81,25 +100,6 @@ public class FrameTabuada {
 		labelMaximoMultiplicador.setText("Máximo Multiplicador:");
 		labelMaximoMultiplicador.setFont(componentesDaConta);
 		labelMaximoMultiplicador.setBounds(55, 200, 300, 50);
-		
-		JButton buttonCalcular = new JButton();
-		buttonCalcular.setText("Calcular");
-		buttonCalcular.setBackground(new Color(34,139,34));
-		buttonCalcular.setForeground(Color.white);
-		buttonCalcular.setFont(buttonEResultado);
-		buttonCalcular.setBounds(15, 260, 240, 40);
-
-		JButton buttonLimpar = new JButton();
-		buttonLimpar.setText("Limpar");
-		buttonLimpar.setBackground(new Color(255,215,0));
-		buttonLimpar.setForeground(Color.white);
-		buttonLimpar.setFont(buttonEResultado);
-		buttonLimpar.setBounds(270, 260, 200, 40);
-
-		JLabel labelResultado = new JLabel();
-		labelResultado.setText("Resultado:");
-		labelResultado.setFont(buttonEResultado);
-		labelResultado.setBounds(15, 295, 150, 50);
 
 		JTextField textFieldMultiplicando = new JTextField();
 		textFieldMultiplicando.setFont(componentesDaConta);
@@ -117,12 +117,13 @@ public class FrameTabuada {
 		textFieldMaxMulti.setBounds(270, 213, 200, 30);
 
 		JScrollPane scrollResultado = new JScrollPane();
-		scrollResultado.setBounds(15, 340, 454, 205);
+		scrollResultado.setBounds(15, 340, 454, 305);
 		JList<String> listResultado = new JList<String>();
+		listResultado.setBackground(new Color(252, 233, 164));
 		listResultado.setMinimumSize(new Dimension(100, 100));
 
 		// Adicionando os componentes ao container e o configurando
-		//painel.add(labelAprendendo);
+		painel.add(labelAprendendo);
 		painel.add(labelTituloTabuada);
 		painel.add(labelDescricaoTabuada);
 		painel.add(labelDescricaoTabuada2);
@@ -149,26 +150,36 @@ public class FrameTabuada {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (Integer.parseInt(textFieldMultiplicando.getText()) <= 9999
-						&& Integer.parseInt(textFieldMaxMulti.getText()) <= 9999
-						&& Integer.parseInt(textFieldMinMulti.getText()) <= Integer
-								.parseInt(textFieldMaxMulti.getText())) {
+				try {
+					if (Integer.parseInt(textFieldMinMulti.getText()) <= Integer
+							.parseInt(textFieldMaxMulti.getText())) {
 
-					Cliente tabuada = new Cliente();
-					tabuada.numeroMultiplicado = Integer.parseInt(textFieldMultiplicando.getText());
-					tabuada.minMultiplicador = Integer.parseInt(textFieldMinMulti.getText());
-					tabuada.maxMultiplicador = Integer.parseInt(textFieldMaxMulti.getText());
+						Cliente tabuada = new Cliente();
+						tabuada.numeroMultiplicado = Integer.parseInt(textFieldMultiplicando.getText());
+						tabuada.minMultiplicador = Integer.parseInt(textFieldMinMulti.getText());
+						tabuada.maxMultiplicador = Integer.parseInt(textFieldMaxMulti.getText());
 
-					DefaultListModel<String> listModel = new DefaultListModel<String>();
-					for (String percorrer : tabuada.getResultados()) {
-						listModel.addElement(percorrer);
+						DefaultListModel<String> listModel = new DefaultListModel<String>();
+						for (String percorrer : tabuada.getResultados()) {
+							listModel.addElement(percorrer);
+						}
+						listResultado.setModel(listModel);
+						scrollResultado.getViewport().add(listResultado);
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"O Mínimo Multiplicador é maior que o Máximo Multiplicador!", "ERRO",
+								JOptionPane.ERROR_MESSAGE, null);
+						textFieldMultiplicando.setText("");
+						textFieldMinMulti.setText("");
+						textFieldMaxMulti.setText("");
 					}
-					listResultado.setModel(listModel);
-					scrollResultado.getViewport().add(listResultado);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Números muito altos em alguma das caixas de texto!", "Erro",
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Não pode inserir um carácter", "ERRO!",
 							JOptionPane.ERROR_MESSAGE, null);
+					textFieldMultiplicando.setText("");
+					textFieldMinMulti.setText("");
+					textFieldMaxMulti.setText("");
 				}
 
 			}
@@ -178,7 +189,7 @@ public class FrameTabuada {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				textFieldMultiplicando.setText("");
 				textFieldMinMulti.setText("");
 				textFieldMaxMulti.setText("");
